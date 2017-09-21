@@ -1,5 +1,4 @@
 import java.io.*;
-import java.nio.Buffer;
 import java.util.Scanner;
 
 public class Menu {
@@ -11,33 +10,37 @@ public class Menu {
         list = new PatientList();
     }
     public void enterNewPatient(){
-        Patient newPatient = new Patient(getNewPatientFirstName(),getNewPatientLastName(),
-                getNewPatientPriority(), currentID);
+        Patient newPatient = new Patient(getUserInputPatientFirstName(), getUserInputPatientLastName(),
+                getUserInputPatientPriority(), currentID);
         currentID++;
         list.addToList(newPatient);
 
     }
     public void findNextPatient(){
+        if (list.isEmpty()){
+            System.out.println("There are no more patients to be seen");
+        }
+        if (!list.isEmpty()) {
+            list.sortByPriority();
+            list.getNextPatient().nextPatientOutputString();
+            list.removeFirstElement();
+        }
+
+    }
+    public void findPosition(){
         list.sortByPriority();
-        list.getNextPatient().nextPatientOutputString();
-        list.removeFirstElement();
+        String positionLName = getUserInputPatientLastName();
+        String positionFName = getUserInputPatientFirstName();
+        list.findPosition(positionLName, positionFName);
     }
-
-
-
-    public int findPosition(){
-        return 0;
+    public void displayPriorityList(){
+        list.sortByPriority();
+        list.getPriorityList();
     }
-    public String displayPriorityList(){
-        return "";
+    public void displayIDlist(){
+        list.sortByIDNumber();
+        list.getIDList();
     }
-    public String displayIIDlist(){
-        return "";
-    }
-
-
-
-
     public void quit(){
         saveID();
         System.exit(0);
@@ -109,7 +112,7 @@ public class Menu {
             menuInteraction();
         }
         if (action.equals("P")){
-            displayIIDlist();
+            displayIDlist();
             menuInteraction();
         }
         if (action.equals("Q")){
@@ -124,19 +127,16 @@ public class Menu {
         displayOptions();
         processAction(getAction());
     }
-    public String getNewPatientFirstName() {
+    public String getUserInputPatientFirstName() {
         System.out.println("Enter first name");
         return k.next();
     }
-    public String getNewPatientLastName() {
+    public String getUserInputPatientLastName() {
         System.out.println("Enter Last Name");
         return k.next();
     }
-    public int getNewPatientPriority(){
+    public int getUserInputPatientPriority(){
         System.out.println("Enter priority");
         return k.nextInt();
     }
-
-
-
 }

@@ -38,6 +38,9 @@ public class Patient {
     public String getLastName(){
         return this.lastName;
     }
+    public String printFullName(String lName, String fName){
+        return lName + ", " + fName;
+    }
     public int getID(){
         return this.ID;
     }
@@ -51,16 +54,18 @@ public class Patient {
         return (getLastName() + " " + getFirstName() +" " + leadingZeroPriority(getPriority()) +" "+
                 leadingZeroID(getID()) + " " +getTime());
     }
-
     public String leadingZeroID(int ID){
         return String.format("%06d", ID);
     }
     public String leadingZeroPriority(int priority){
         return String.format("%03d", priority);
     }
-
     public void nextPatientOutputString(){
         System.out.println("Patient " + getFirstName() + " " + getLastName() + " with ID " + leadingZeroID(getID())
                 + " is ready to be seen.");
+    }
+    public void findPositionOutPutString(String lName, String fName, int ID, int index){
+        System.out.println("There are " + index + " people ahead of " + fName + " " + lName +
+                " (ID: " + leadingZeroID(ID) + ").");
     }
 }
