@@ -51,12 +51,14 @@ public class Patient {
         return (getLastName() + " " + getFirstName() +" " + leadingZeroPriority(getPriority()) +" "+
                 leadingZeroID(getID()) + " " +getTime());
     }
+
     public String leadingZeroID(int ID){
         return String.format("%06d", ID);
     }
     public String leadingZeroPriority(int priority){
         return String.format("%03d", priority);
     }
+
     public void nextPatientOutputString(){
         System.out.println("Patient " + getFirstName() + " " + getLastName() + " with ID " + leadingZeroID(getID())
                 + " is ready to be seen.");

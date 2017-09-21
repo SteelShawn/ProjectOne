@@ -1,4 +1,7 @@
+import java.io.*;
+import java.nio.Buffer;
 import java.util.Scanner;
+
 public class Menu {
     Scanner k = new Scanner(System.in);
     int currentID;
@@ -19,6 +22,9 @@ public class Menu {
         list.getNextPatient().nextPatientOutputString();
         list.removeFirstElement();
     }
+
+
+
     public int findPosition(){
         return 0;
     }
@@ -28,14 +34,36 @@ public class Menu {
     public String displayIIDlist(){
         return "";
     }
+
+
+
+
     public void quit(){
         saveID();
+        System.exit(0);
     }
     public int getIDFromPrevious(){
-        return 0; //Read file for Input
+        int IDFromFile = 0;
+        File file = new File("CurrentIDFile.txt");
+        try {
+            Scanner read = new Scanner(file);
+            IDFromFile = Integer.parseInt(read.nextLine());
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+        return IDFromFile; //Read file for Input
     }
     public void saveID(){
-        //save the current ID as a file output
+        try{
+            PrintWriter writer = new PrintWriter("CurrentIDFile.txt", "UTF-8");
+                writer.println(currentID);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("file error!");
+            e.printStackTrace();
+        }
+
     }
     /**
      * Method to get the user's input
@@ -89,7 +117,6 @@ public class Menu {
         }
 
     }
-
     /**
      * Method combinging displayOptions, getActions, ProcessActions
      */

@@ -17,6 +17,10 @@ public class Tester {
 
         */
 
+        //Menu testMenu = new Menu();
+        //int test = testMenu.getIDFromPrevious();
+       // System.out.println(test);
+        //testMenu.saveID();
     }
 
 
