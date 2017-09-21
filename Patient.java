@@ -57,4 +57,8 @@ public class Patient {
     public String leadingZeroPriority(int priority){
         return String.format("%03d", priority);
     }
+    public void nextPatientOutputString(){
+        System.out.println("Patient " + getFirstName() + " " + getLastName() + " with ID " + leadingZeroID(getID())
+                + " is ready to be seen.");
+    }
 }

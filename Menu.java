@@ -2,20 +2,22 @@ import java.util.Scanner;
 public class Menu {
     Scanner k = new Scanner(System.in);
     int currentID;
-    List list;
+    PatientList list;
     public Menu(){
         currentID = getIDFromPrevious();
-        list = new List();
+        list = new PatientList();
     }
     public void enterNewPatient(){
         Patient newPatient = new Patient(getNewPatientFirstName(),getNewPatientLastName(),
                 getNewPatientPriority(), currentID);
+        currentID++;
         list.addToList(newPatient);
-        menuInteraction();
 
     }
-    public String findNextPatient(){
-        return "";
+    public void findNextPatient(){
+        list.sortByPriority();
+        list.getNextPatient().nextPatientOutputString();
+        list.removeFirstElement();
     }
     public int findPosition(){
         return 0;
@@ -35,7 +37,6 @@ public class Menu {
     public void saveID(){
         //save the current ID as a file output
     }
-
     /**
      * Method to get the user's input
      * @return action a String of the user's input
@@ -65,18 +66,23 @@ public class Menu {
     public void processAction(String action){
         if (action.equals("E")){
             enterNewPatient();
+            menuInteraction();
         }
         if (action.equals("N")){
             findNextPatient();
+            menuInteraction();
         }
         if (action.equals("F")){
             findPosition();
+            menuInteraction();
         }
         if (action.equals("S")){
             displayPriorityList();
+            menuInteraction();
         }
         if (action.equals("P")){
             displayIIDlist();
+            menuInteraction();
         }
         if (action.equals("Q")){
             quit();
