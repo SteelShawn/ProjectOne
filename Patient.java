@@ -12,11 +12,10 @@ public class Patient {
     public Patient(){
         firstName = null;
         lastName = null;
-        priority = 000;
-        ID = 000000;
+        priority = 0;
+        ID = 0;
         time = "0";
     }
-
     public Patient(String fName, String lName, int priority, int currentID){
         firstName = fName;
         lastName = lName;
@@ -27,7 +26,7 @@ public class Patient {
     }
     private String initializeTime(){
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(cal.getTime());
     }
     public String getTime(){
@@ -47,5 +46,15 @@ public class Patient {
     }
     public void setPriority(int newPriority){
         priority = newPriority;
+    }
+    public String toString() {
+        return (getLastName() + " " + getFirstName() +" " + leadingZeroPriority(getPriority()) +" "+
+                leadingZeroID(getID()) + " " +getTime());
+    }
+    public String leadingZeroID(int ID){
+        return String.format("%06d", ID);
+    }
+    public String leadingZeroPriority(int priority){
+        return String.format("%03d", priority);
     }
 }
